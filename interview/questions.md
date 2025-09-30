@@ -144,4 +144,187 @@ Characteristics of strict mode in javascript
 - The 'use strict' keyword is used to define strict mode at the start of the script. Strict mode is supported by all browsers.
 - Engineers will not be allowed to create global variables in 'Strict Mode
 
-## 
+## Higher Order Function in Javascript:
+Functions that operate on other functions, either by taking them as arguments or by returning them, are called higher-order functions.
+```javascript
+function higherOrder(fn) {
+  fn();
+}
+   
+higherOrder(function() { console.log("Hello world") });  
+```
+
+## this:
+The “this” keyword refers to the object that the function is a property of
+```javascript
+var obj = {
+    name:  "vivek",
+    getName: function(){
+    console.log(this.name);
+  }
+}
+   
+obj.getName();
+```
+
+## Self Invoking Functions:
+Without being requested, a self-invoking expression is automatically invoked (initiated). If a function expression is followed by (), it will execute automatically. A function declaration cannot be invoked by itself.
+
+## Explain call(), apply() and, bind() methods.
+
+- call() method allows an object to use the method (function) of another object.
+```javascript
+function sayHello(){
+  return "Hello " + this.name;
+}
+        
+var obj = {name: "Sandy"};
+        
+sayHello.call(obj);
+        
+// Returns "Hello Sandy"
+```
+
+- The apply method is similar to the call() method. The only difference is that,
+
+call() method takes arguments separately whereas, apply() method takes arguments as an array.
+```javascript
+function saySomething(message){
+  return this.name + " is " + message;
+}        
+var person4 = {name:  "John"};
+saySomething.apply(person4, ["awesome"]);
+```
+
+- bind():
+This method returns a new function, where the value of “this” keyword will be bound to the owner object, which is provided as a parameter.
+```javascript
+var bikeDetails = {
+    displayDetails: function(registrationNumber,brandName){
+    return this.name+ " , "+ "bike details: "+ registrationNumber + " , " + brandName;
+  }
+}
+   
+var person1 = {name:  "Vivek"};
+     
+var detailsOfPerson1 = bikeDetails.displayDetails.bind(person1, "TS0122", "Bullet");
+      
+// Binds the displayDetails function to the person1 object
+        
+      
+detailsOfPerson1();
+//Returns Vivek, bike details: TS0122, Bullet
+```
+
+## exec () and test () methods in javascript?
+- test () and exec () are RegExp expression methods used in javascript.
+- exec () to search a string for a specific pattern, and if it finds it, it'll return the pattern directly; else, it'll return an 'empty' result.
+- use a test () to find a string for a specific pattern. It will return the Boolean value 'true' on finding the given text otherwise, it will return 'false'.
+
+## currying?
+- Currying is an advanced technique to transform a function of arguments n, to n functions of one or fewer arguments.
+``` javascript
+function add (a) {
+  return function(b){
+    return a + b;
+  }
+}
+
+add(3)(4)
+```
+
+## External JavaScript
+External JavaScript is the JavaScript Code (script) written in a separate file with the extension.js, and then we link that file inside the <head> or <body> element of the HTML file where the code is to be placed. 
+
+## Scope and Scope Chain in javascript.
+Scope in JS determines the accessibility of variables and functions at various parts of one’s code.
+In general terms, the scope will let us know at a given part of code, what are variables and functions we can or cannot access.
+
+There are three types of scopes in JS:
+
+- Global Scope
+- Local or Function Scope
+- Block Scope
+
+Global Scope: Variables or functions declared in the global namespace have global scope, which means all the variables and functions having global scope can be accessed from anywhere inside the code.
+```javascript
+var globalVariable = "Hello world";
+
+function sendMessage(){
+  return globalVariable; // can access globalVariable since it's written in global space
+}
+function sendMessage2(){
+  return sendMessage(); // Can access sendMessage function since it's written in global space
+}
+sendMessage2();  // Returns “Hello world”
+```
+
+Function Scope: Any variables or functions declared inside a function have local/function scope, which means that all the variables and functions declared inside a function, can be accessed from within the function and not outside of it.
+
+Block Scope: Block scope is related to the variables declared using let and const. Variables declared with var do not have block scope. Block scope tells us that any variable declared inside a block { }, can be accessed only inside that block and cannot be accessed outside of it.
+Scope Chain: JavaScript engine also uses Scope to find variables. Let’s understand that using an example:
+```javascript
+var y = 24;
+
+function favFunction(){
+  var x = 667;
+  var anotherFavFunction = function(){
+    console.log(x); // Does not find x inside anotherFavFunction, so looks for variable inside favFunction, outputs 667
+  }
+
+  var yetAnotherFavFunction = function(){
+    console.log(y); // Does not find y inside yetAnotherFavFunction, so looks for variable inside favFunction and does not find it, so looks for variable in global scope, finds it and outputs 24
+  }
+
+  anotherFavFunction();
+  yetAnotherFavFunction();
+}
+favFunction();
+```
+## Closures :
+Closures are an ability of a function to remember the variables and functions that are declared in its outer scope.
+
+```javascript
+var Person = function(pName){
+  var name = pName;
+
+  this.getName = function(){
+    return name;
+  }
+}
+
+var person = new Person("Neelesh");
+console.log(person.getName());
+```
+
+```javascript
+function randomFunc(){
+  var obj1 = {name:"Vivian", age:45};
+
+  return function(){
+    console.log(obj1.name + " is "+ "awesome"); // Has access to obj1 even when the randomFunc function is executed
+
+  }
+}
+
+var initialiseClosure = randomFunc(); // Returns a function
+
+initialiseClosure();
+```
+Let’s understand the code above,
+
+The function randomFunc() gets executed and returns a function when we assign it to a variable:
+
+var initialiseClosure = randomFunc();
+The returned function is then executed when we invoke initialiseClosure:
+
+initialiseClosure(); 
+The line of code above outputs “Vivian is awesome” and this is possible because of closure.
+
+console.log(obj1.name + " is "+ "awesome");
+When the function randomFunc() runs, it seems that the returning function is using the variable obj1 inside it:
+
+Therefore randomFunc(), instead of destroying the value of obj1 after execution, saves the value in the memory for further reference. This is the reason why the returning function is able to use the variable declared in the outer scope even after the function is already executed.
+
+This ability of a function to store a variable for further reference even after it is executed is called Closure
+
