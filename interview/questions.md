@@ -328,3 +328,18 @@ Therefore randomFunc(), instead of destroying the value of obj1 after execution,
 
 This ability of a function to store a variable for further reference even after it is executed is called Closure
 
+## advantages of javascript
+
+- Javascript is executed on the client-side as well as server-side also. There are a variety of Frontend Frameworks that you may study and utilize. However, if you want to use JavaScript on the backend, you'll need to learn NodeJS. It is currently the only JavaScript framework that may be used on the backend.
+- Javascript is a simple language to learn.
+- Web pages now have more functionality because of Javascript.
+- To the end-user, Javascript is quite quick
+
+## object prototypes?
+All javascript objects inherit properties from a prototype. For example,
+Date objects inherit properties from the Date prototype
+Math objects inherit properties from the Math prototype
+Array objects inherit properties from the Array prototype.
+On top of the chain is Object.prototype. Every prototype inherits properties and methods from the Object.prototype.
+A prototype is a blueprint of an object. The prototype allows us to use properties and methods on an object even if the properties and methods do not exist on the current object.
+
